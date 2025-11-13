@@ -1,0 +1,151 @@
+=== INICIANDO EJECUCIÓN DE LAS PRIMERAS 6 PREGUNTAS ===
+Limpiando compilaciones anteriores...
+Compilando archivos Scala...
+Compilando Pregunta1.scala
+---------------------------------------------------------------------------------------
+Compilando Pregunta2.scala
+---------------------------------------------------------------------------------------
+Compilando Pregunta3.scala
+---------------------------------------------------------------------------------------
+Compilando Pregunta4.scala
+---------------------------------------------------------------------------------------
+Compilando Pregunta5.scala
+---------------------------------------------------------------------------------------
+Compilando Pregunta6.scala
+---------------------------------------------------------------------------------------
+Creando JAR...
+JAR creado exitosamente. Tamaño: 20K
+
+=== EJECUTANDO PREGUNTA 1 ===
+=== PREGUNTA 1: Lugares turísticos por destino con coordenadas ===
+Agrupa por DESTINO_TURISTICO y calcula:
+- Total de lugares por destino
+- Número de ciudades únicas
+- Promedio de latitud y longitud
++-----------------+-------------+---------------+-------------------+------------------+
+|DESTINO_TURISTICO|total_lugares|ciudades_unicas|latitud_promedio   |longitud_promedio |
++-----------------+-------------+---------------+-------------------+------------------+
+|Alto Mayo        |27           |10             |-5.983491641770247 |-77.18542494280972|
+|Tarapoto         |19           |8              |-6.46876630865587  |-76.44065042213757|
+|Abiseo           |10           |2              |-7.45666715899751  |-78.17855641366822|
+|Tocache          |5            |2              |-7.3731802753702524|-76.42039093436689|
++-----------------+-------------+---------------+-------------------+------------------+
+
+Total de destinos turísticos: 4
+✓ Pregunta 1 completada exitosamente.
+
+=== EJECUTANDO PREGUNTA 2 ===
+=== PREGUNTA 2: Filtrado por fechas con muestra aleatoria ===
+Filtra registros entre 2023-01-01 y 2024-12-31
+Toma muestra aleatoria del 40%
+Muestra nombre, destino, ciudad y fecha
++-----------------------------------+-----------------+--------------------+----------+
+|NOMBRE_LUGAR_TURISTICO             |DESTINO_TURISTICO|CIUDAD              |FECHA     |
++-----------------------------------+-----------------+--------------------+----------+
+|Museo Etno Histórico de Pachiza    |Abiseo           |ALTO EL SOL         |2024-09-17|
+|Museo Departamental de San Martín  |Alto Mayo        |AGUA BLANCA         |2024-04-17|
+|Laguna Ricuricocha                 |Tarapoto         |BOCATOMA DE SHILCAYO|2024-04-06|
+|Catarata Shihui                    |Abiseo           |ATUN RUMI           |2024-01-02|
+|Catarata Velo de Plata             |Tocache          |8 DE JULIO          |2023-12-02|
+|Laguna Venecia                     |Tarapoto         |3 DE OCTUBRE        |2023-09-29|
+|Mirador Turístico Punta de San Juan|Alto Mayo        |AGUA BLANCA         |2023-09-17|
+|Catarata de Pucayaquillo           |Tarapoto         |BENIGNO             |2023-05-25|
+|Cascada Timón                      |Abiseo           |ATUN RUMI           |2023-04-25|
++-----------------------------------+-----------------+--------------------+----------+
+
+Registros en el rango de fechas: 22
+Muestra aleatoria (40%): 9 registros
+✓ Pregunta 2 completada exitosamente.
+
+=== EJECUTANDO PREGUNTA 3 ===
+=== PREGUNTA 3: Búsqueda de cascadas/cataratas ===
+Busca en NOMBRE_LUGAR_TURISTICO textos que contengan 'catarata' o 'cascada'
+Agrupa por DESTINO_TURISTICO y cuenta ocurrencias
++-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|DESTINO_TURISTICO|total_cataratas_cascadas|nombres                                                                                                                                                                                                 |
++-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|Tarapoto         |8                       |[Cascadas de Sabaloyacu,  Catarata de Ahuashiyacu, Catarata de Huacamaillo, Cascadas de Carpishuyacu, Catarata de Pucayaquillo, Cascada El Salto de la Bruja, Catarata de Chapawanki, Cascadas Progreso]|
+|Abiseo           |4                       |[Catarata El Breo, Cascada Timón, Catarata Maquisapa, Catarata Shihui]                                                                                                                                  |
+|Alto Mayo        |4                       |[Cascada de Paccha, Cascada de Lejiayacu, Cascada Aguas Calientes, Cascada de Asnacyacu]                                                                                                                |
+|Tocache          |3                       |[Catarata Velo de Plata, Cascada de San Juan de Ishanga, Cascada de la Ninfa]                                                                                                                           |
++-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+=== DETALLES ENCONTRADOS ===
++------------------------------+-----------------+---------------+
+|NOMBRE_LUGAR_TURISTICO        |DESTINO_TURISTICO|CIUDAD         |
++------------------------------+-----------------+---------------+
+|Cascadas de Sabaloyacu        |Tarapoto         |ALFONSO UGARTE |
+| Catarata de Ahuashiyacu      |Tarapoto         |3 DE OCTUBRE   |
+|Catarata Velo de Plata        |Tocache          |8 DE JULIO     |
+|Catarata de Huacamaillo       |Tarapoto         |AHUASHILLO     |
+|Catarata El Breo              |Abiseo           |ATUN RUMI      |
+|Cascada de Paccha             |Alto Mayo        |7 DE JUNIO     |
+|Cascada de San Juan de Ishanga|Tocache          |ACCESO HUALLAGA|
+|Cascadas de Carpishuyacu      |Tarapoto         |3 DE OCTUBRE   |
+|Catarata de Pucayaquillo      |Tarapoto         |BENIGNO        |
+|Cascada de la Ninfa           |Tocache          |ACCESO HUALLAGA|
++------------------------------+-----------------+---------------+
+only showing top 10 rows
+
+✓ Pregunta 3 completada exitosamente.
+
+=== EJECUTANDO PREGUNTA 4 ===
+=== PREGUNTA 4: Estadísticas de coordenadas por destino ===
+Agrupa por DESTINO_TURISTICO y calcula:
+- Máximas y mínimas latitudes/longitudes
+- Rangos de variación geográfica
+- Total de registros por destino
++-----------------+---------------+------------------+------------------+-----------------+---------------+------------------+------------------+
+|DESTINO_TURISTICO|total_registros|latitud_maxima    |latitud_minima    |longitud_maxima  |longitud_minima|rango_latitud     |rango_longitud    |
++-----------------+---------------+------------------+------------------+-----------------+---------------+------------------+------------------+
+|Alto Mayo        |27             |-5.66116          |-6.239091181292244|-76.8421018      |-77.9806535    |0.5779311812922439|1.1385517000000078|
+|Tarapoto         |19             |-6.38063          |-6.702942955146252|-76.1343616      |-78.0          |0.322312955146252 |1.8656383999999946|
+|Abiseo           |10             |-7.090556629975088|-7.810831         |-76.7666         |-82.77722319   |0.7202743700249119|6.010623190000004 |
+|Tocache          |5              |-3.6455109        |-8.485195476851265|-66.5857788303838|-86.0359687    |4.8396845768512655|19.450189869616196|
++-----------------+---------------+------------------+------------------+-----------------+---------------+------------------+------------------+
+
+✓ Pregunta 4 completada exitosamente.
+
+=== EJECUTANDO PREGUNTA 5 ===
+=== PREGUNTA 5: Estadísticas completas de LATITUD ===
+Calcula a nivel global:
+- Media, promedio, desviación estándar, varianza
+- Máximo, mínimo, conteo total
+Luego por destino turístico
+=== ESTADÍSTICAS GLOBALES DE LATITUD ===
++------------------+------------------+-------------------+-----------------+----------+------------------+-------------+
+|             media|          promedio|desviacion_estandar|         varianza|    maximo|            minimo|total_valores|
++------------------+------------------+-------------------+-----------------+----------+------------------+-------------+
+|-6.490055855066959|-6.490055855066959|   0.80833789988791|0.653410160395197|-3.6455109|-8.485195476851265|           61|
++------------------+------------------+-------------------+-----------------+----------+------------------+-------------+
+
+=== ESTADÍSTICAS POR DESTINO TURÍSTICO ===
++-----------------+------+-------------------+-------------------+------------------+------------------+
+|DESTINO_TURISTICO|conteo|promedio_latitud   |desviacion_latitud |max_latitud       |min_latitud       |
++-----------------+------+-------------------+-------------------+------------------+------------------+
+|Alto Mayo        |27    |-5.983491641770246 |0.1646778266445595 |-5.66116          |-6.239091181292244|
+|Tarapoto         |19    |-6.468766308655869 |0.08189100453577547|-6.38063          |-6.702942955146252|
+|Abiseo           |10    |-7.45666715899751  |0.2934557328431462 |-7.090556629975088|-7.810831         |
+|Tocache          |5     |-7.3731802753702524|2.087093532957027  |-3.6455109        |-8.485195476851265|
++-----------------+------+-------------------+-------------------+------------------+------------------+
+
+✓ Pregunta 5 completada exitosamente.
+
+=== EJECUTANDO PREGUNTA 6 ===
+=== PREGUNTA 6: Análisis de densidad geográfica (3 MapReduce) ===
+MapReduce 1: Agrupa por destino y calcula estadísticas básicas
+MapReduce 2: Calcula área aproximada y densidad de lugares
+MapReduce 3: Categoriza por densidad (Muy Baja a Muy Alta)
++-----------------+-------------+--------------+---------------+---------+--------+------------------+
+|DESTINO_TURISTICO|total_lugares|latitud_centro|longitud_centro|area_km2 |densidad|categoria_densidad|
++-----------------+-------------+--------------+---------------+---------+--------+------------------+
+|Tarapoto         |19           |-6.4688       |-76.4407       |398.61   |0.05    |Muy Baja          |
+|Alto Mayo        |27           |-5.9835       |-77.1854       |632.51   |0.04    |Muy Baja          |
+|Abiseo           |10           |-7.4567       |-78.1786       |6409.46  |0.0     |Muy Baja          |
+|Tocache          |5            |-7.3732       |-76.4204       |177881.64|0.0     |Muy Baja          |
++-----------------+-------------+--------------+---------------+---------+--------+------------------+
+
+✓ Pregunta 6 completada exitosamente.
+Limpiando archivos temporales...
+
+=== TODAS LAS PREGUNTAS COMPLETADAS ===
