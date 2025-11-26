@@ -15,8 +15,8 @@ class CSVToPostgres:
             'host': os.getenv('DB_HOST', 'localhost'),
             'port': int(os.getenv('DB_PORT', 5432)),
             'database': os.getenv('DB_NAME', 'db_bienes_servicios'),
-            'user': os.getenv('DB_USER', 'admin'),
-            'password': os.getenv('DB_PASSWORD', 'admin')
+            'user': os.getenv('DB_USER'),
+            'password': os.getenv('DB_PASSWORD')
         }
         
     def create_connection(self):
