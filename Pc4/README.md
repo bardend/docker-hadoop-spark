@@ -11,6 +11,8 @@ docker run -d \
 ```
 
 ```bash
+docker exec -it db-bienes-servicios_postgres psql -U admin -d db_bienes_servicios
+
 db_bienes_servicios=# \d bienes_servicios
                               Table "public.bienes_servicios"
            Column           |            Type             | Collation | Nullable | Default 
