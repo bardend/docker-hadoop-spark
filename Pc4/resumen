@@ -1,0 +1,18 @@
+Bienes y servicios adquiridos por el Gobierno Regional del Callao
+Gobernabilidad
+Economía y Finanzas
+Detalle de compras de bienes y Servicios Adquiridos por el GORE CALLAO durante el 2024.
+
+ 
+
+Información extraída del aplicativo SIGA del Ministerio de Economía y Finanzas.
+
+Cada registro contiene el bien o servicio adquirido por cada orden de compra o servicio.
+
+Este Dataset esta caracterizado por:
+
+ 
+
+Datos de la Orden: fecha de adquisición, numero de orden, número de expediente SIAF y fuente de financiamiento
+Datos del Bien o Servicio: Tipo de bien adquirido, monto del bien, cantidad adquirida y denominación del bien.
+Datos presupuestales: especifica de gasto de la adquisición, tipo de recurso, función, programa y sub programa.
