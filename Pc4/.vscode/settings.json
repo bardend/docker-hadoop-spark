@@ -10,6 +10,39 @@
             "database": "db_bienes_servicios",
             "username": "admin",
             "password": "admin"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "bienes-postgres",
+            "username": "admin",
+            "password": "admin",
+            "database": "db_bienes_servicios"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "servicios",
+            "database": "db_bienes_servicios",
+            "username": "admin",
+            "password": "admin"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "db-servicios",
+            "database": "db_bienes_servicios",
+            "username": "admin",
+            "password": "admin"
         }
     ]
 }

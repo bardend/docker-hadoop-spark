@@ -1,0 +1,488 @@
+(base) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ conda activate spark-env
+(spark-env) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ spark-shell --version
+WARNING: Using incubator modules: jdk.incubator.vector
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 4.0.1
+      /_/
+                        
+Using Scala version 2.13.16, OpenJDK 64-Bit Server VM, 21.0.9
+Branch HEAD
+Compiled by user runner on 2025-09-02T03:10:51Z
+Revision 29434ea766b0fc3c3bf6eaadb43a8f931133649e
+Url https://github.com/apache/spark
+Type --help for more information.
+(spark-env) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ SPARK_LOCAL_IP=127.0.0.1 spark-shell   --jars /home/usuario/.ivy2.5.2/jars/org.postgresql_postgresql-42.5.0.jar   --conf spark.driver.bindAddress=127.0.0.1   --conf spark.driver.host=127.0.0.1   --conf spark.ui.enabled=false   --conf "spark.driver.extraClassPath=/home/usuario/.ivy2.5.2/jars/org.postgresql_postgresql-42.5.0.jar"   -i pc4_query_fixed.scala
+WARNING: Using incubator modules: jdk.incubator.vector
+25/11/26 20:38:56 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 4.0.1
+      /_/
+         
+Using Scala version 2.13.16 (OpenJDK 64-Bit Server VM, Java 21.0.9)
+Type in expressions to have them evaluated.
+Type :help for more information.
+Spark context available as 'sc' (master = local[*], app id = local-1764207542630).
+Spark session available as 'spark'.
+
+scala> :load pc4_query_fixed.scala
+     | 
+val args: Array[String] = Array()
+Loading pc4_query_fixed.scala...
+import org.apache.spark.sql.functions._
+val bienesServiciosDF: org.apache.spark.sql.DataFrame = [FechaCorte: timestamp, NumeroRuc: bigint ... 16 more fields]
+root
+ |-- FechaCorte: timestamp (nullable = true)
+ |-- NumeroRuc: long (nullable = true)
+ |-- FechaOrden: timestamp (nullable = true)
+ |-- NumeroOrden: long (nullable = true)
+ |-- CodigoGenerico: string (nullable = true)
+ |-- DescripcionGenerico: string (nullable = true)
+ |-- Importe: double (nullable = true)
+ |-- ExpedienteSiaf: long (nullable = true)
+ |-- FuenteFinanciamiento: string (nullable = true)
+ |-- EspecificoGasto: long (nullable = true)
+ |-- DescripcionEspecificoGasto: string (nullable = true)
+ |-- Cantidad: double (nullable = true)
+ |-- TipoBien: string (nullable = true)
+ |-- TipoRecurso: string (nullable = true)
+ |-- FuncionPrograma: string (nullable = true)
+ |-- MetaSiaf: long (nullable = true)
+ |-- Programa: long (nullable = true)
+ |-- Subprograma: long (nullable = true)
+
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|         FechaCorte|  NumeroRuc|         FechaOrden|NumeroOrden|CodigoGenerico| DescripcionGenerico| Importe|ExpedienteSiaf|FuenteFinanciamiento|EspecificoGasto|DescripcionEspecificoGasto|Cantidad|TipoBien|TipoRecurso|     FuncionPrograma|MetaSiaf|Programa|Subprograma|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|2024-04-25 00:00:00|20536547976|2024-02-02 00:00:00|          1|           B17|COMBUSTIBLES, CAR...|392168.0|           515|18 CANON Y SOBREC...|         231311|      COMBUSTIBLES Y CA...|22538.39|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B71|OFICINA: UTILES Y...|  4500.0|           637|18 CANON Y SOBREC...|         231512|      PAPELERIA EN GENE...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B16|COCINA,COMEDOR,CA...| 18000.0|           637|18 CANON Y SOBREC...|         231532|      DE COCINA, COMEDO...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B31|ENSEÑANZA: MANUAL...|  5700.0|           637|18 CANON Y SOBREC...|       23159999|                     OTROS|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  2500.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|     5.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  5850.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  2700.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  6250.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  2500.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  4520.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  4000.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  4800.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  4000.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+only showing top 10 rows
+=== Columnas específicas: FechaOrden, NumeroOrden, Importe ===
+val columnasEspecificas: org.apache.spark.sql.DataFrame = [FechaOrden: timestamp, NumeroOrden: bigint ... 1 more field]
++-------------------+-----------+--------+
+|         FechaOrden|NumeroOrden| Importe|
++-------------------+-----------+--------+
+|2024-02-02 00:00:00|          1|392168.0|
+|2024-02-02 00:00:00|          2|  4500.0|
+|2024-02-02 00:00:00|          2| 18000.0|
+|2024-02-02 00:00:00|          2|  5700.0|
+|2024-02-02 00:00:00|          2|  2500.0|
+|2024-02-02 00:00:00|          2|  5850.0|
+|2024-02-02 00:00:00|          2|  2700.0|
+|2024-02-08 00:00:00|          3|  6250.0|
+|2024-02-08 00:00:00|          3|  4520.0|
+|2024-02-08 00:00:00|          3|  4800.0|
+|2024-02-08 00:00:00|          3|  2000.0|
+|2024-02-08 00:00:00|          3| 12000.0|
+|2024-02-08 00:00:00|          3|  6000.0|
+|2024-02-09 00:00:00|          5|  3500.0|
+|2024-02-09 00:00:00|          5|  6500.0|
++-------------------+-----------+--------+
+only showing top 15 rows
+=== Órdenes con Importe mayor a 10000 ===
+val filtroImporte: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [FechaCorte: timestamp, NumeroRuc: bigint ... 16 more fields]
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|         FechaCorte|  NumeroRuc|         FechaOrden|NumeroOrden|CodigoGenerico| DescripcionGenerico| Importe|ExpedienteSiaf|FuenteFinanciamiento|EspecificoGasto|DescripcionEspecificoGasto|Cantidad|TipoBien|TipoRecurso|     FuncionPrograma|MetaSiaf|Programa|Subprograma|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|2024-04-25 00:00:00|20536547976|2024-02-02 00:00:00|          1|           B17|COMBUSTIBLES, CAR...|392168.0|           515|18 CANON Y SOBREC...|         231311|      COMBUSTIBLES Y CA...|22538.39|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B16|COCINA,COMEDOR,CA...| 18000.0|           637|18 CANON Y SOBREC...|         231532|      DE COCINA, COMEDO...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...| 12000.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  4000.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|20604922128|2024-02-09 00:00:00|          6|           B17|COMBUSTIBLES, CAR...| 18387.0|          1186|18 CANON Y SOBREC...|         231312|                     GASES|  8100.0|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|20607109894|2024-02-09 00:00:00|          7|           B67|MOVIMI.Y ACARR.DE...| 40032.0|          1191|18 CANON Y SOBREC...|        2632999|      MAQUINARIAS, EQUI...|    48.0|       B|          Q|        14 INDUSTRIA|     223|      31|         60|
+|2024-04-25 00:00:00|20607109894|2024-02-09 00:00:00|          8|           B67|MOVIMI.Y ACARR.DE...| 50040.0|          1195|18 CANON Y SOBREC...|        2632999|      MAQUINARIAS, EQUI...|    60.0|       B|          Q|        14 INDUSTRIA|     222|      31|         60|
+|2024-04-25 00:00:00|20607109894|2024-02-09 00:00:00|          9|           B67|MOVIMI.Y ACARR.DE...| 89520.0|          1196|18 CANON Y SOBREC...|        2632999|      MAQUINARIAS, EQUI...|    30.0|       B|          Q|        14 INDUSTRIA|     224|      31|         60|
+|2024-04-25 00:00:00|20607109894|2024-02-09 00:00:00|         10|           B67|MOVIMI.Y ACARR.DE...| 71616.0|          1197|18 CANON Y SOBREC...|        2632999|      MAQUINARIAS, EQUI...|    24.0|       B|          Q|        14 INDUSTRIA|     225|      31|         60|
+|2024-04-25 00:00:00|20607109894|2024-02-09 00:00:00|         11|           B67|MOVIMI.Y ACARR.DE...| 41416.0|          1895|18 CANON Y SOBREC...|        2632999|      MAQUINARIAS, EQUI...|   124.0|       B|          Q|        14 INDUSTRIA|     221|      31|         60|
+|2024-04-25 00:00:00|20507634479|2024-02-15 00:00:00|         17|           B09|ALIMENTOS Y BEBID...| 49657.9|          1477|18 CANON Y SOBREC...|        2121199|      OTRAS RETRIBUCION...|    93.0|       B|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
+|2024-04-25 00:00:00|20507634479|2024-02-22 00:00:00|         21|           B09|ALIMENTOS Y BEBID...|17420.95|          1544|18 CANON Y SOBREC...|        2121199|      OTRAS RETRIBUCION...|     5.0|       B|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
+|2024-04-25 00:00:00|20603267193|2024-02-23 00:00:00|         27|           B16|COCINA,COMEDOR,CA...| 14400.0|          1631|18 CANON Y SOBREC...|         231532|      DE COCINA, COMEDO...|  1200.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10412000841|2024-02-23 00:00:00|         28|           B89|TELAS Y MATERIALE...| 12600.0|          1632|18 CANON Y SOBREC...|         231211|      VESTUARIO, ACCESO...|  1200.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10412000841|2024-02-23 00:00:00|         28|           B89|TELAS Y MATERIALE...| 27000.0|          1632|18 CANON Y SOBREC...|         231211|      VESTUARIO, ACCESO...|  1200.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|20601809525|2024-02-26 00:00:00|         29|           B64|MUEBLES Y ENSERES...| 25000.0|          1705|18 CANON Y SOBREC...|        2311113|      PARA MOBILIARIO Y...|    50.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|10806787138|2024-03-05 00:00:00|         33|           B89|TELAS Y MATERIALE...| 36316.0|          1964|18 CANON Y SOBREC...|         231211|      VESTUARIO, ACCESO...|  1297.0|       B|          Q|        22 EDUCACION|     160|       6|          8|
+|2024-04-25 00:00:00|10090090173|2024-03-05 00:00:00|         43|           B47|IMPRESOS Y FORMUL...| 27000.0|          1993|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|   150.0|       B|          Q|   17 MEDIO AMBIENTE|     166|      55|        126|
+|2024-04-25 00:00:00|20606487372|2024-03-05 00:00:00|         48|           B89|TELAS Y MATERIALE...| 36400.0|          2030|18 CANON Y SOBREC...|         231211|      VESTUARIO, ACCESO...|  1300.0|       B|          Q|   17 MEDIO AMBIENTE|     166|      55|        126|
+|2024-04-25 00:00:00|20604252718|2024-03-07 00:00:00|         50|           B47|IMPRESOS Y FORMUL...| 11250.0|          2003|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|   150.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|20610430288|2024-03-07 00:00:00|         51|           B85|SIMBOLOS, DISTINT...| 21600.0|          2004|18 CANON Y SOBREC...|        2319914|      SIMBOLOS, DISTINT...|    80.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+only showing top 20 rows
+=== Ordenar por Importe descendente ===
+val ordenadosPorImporte: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [FechaCorte: timestamp, NumeroRuc: bigint ... 16 more fields]
++-------------------+-----------+-------------------+-----------+--------------+--------------------+----------+--------------+--------------------+---------------+--------------------------+----------+--------+-----------+--------------------+--------+--------+-----------+
+|         FechaCorte|  NumeroRuc|         FechaOrden|NumeroOrden|CodigoGenerico| DescripcionGenerico|   Importe|ExpedienteSiaf|FuenteFinanciamiento|EspecificoGasto|DescripcionEspecificoGasto|  Cantidad|TipoBien|TipoRecurso|     FuncionPrograma|MetaSiaf|Programa|Subprograma|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+----------+--------------+--------------------+---------------+--------------------------+----------+--------+-----------+--------------------+--------+--------+-----------+
+|2024-04-25 00:00:00|20547639309|2024-04-02 00:00:00|         90|           B67|MOVIMI.Y ACARR.DE...| 8153385.0|          2475|18 CANON Y SOBREC...|         263111|      PARA TRANSPORTE T...|      46.0|       B|          Q|05 ORDEN PUBLICO ...|     194|      14|         28|
+|2024-04-25 00:00:00|20605159398|2024-01-18 00:00:00|          1|           S06|     ASEO Y LIMPIEZA| 6525000.0|            13|18 CANON Y SOBREC...|         232311|      SERVICIOS DE LIMP...| 6525000.0|       S|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|20547639309|2024-04-02 00:00:00|         89|           B67|MOVIMI.Y ACARR.DE...| 2962734.5|          2474|18 CANON Y SOBREC...|         263111|      PARA TRANSPORTE T...|      85.0|       B|          Q|05 ORDEN PUBLICO ...|     194|      14|         28|
+|2024-04-25 00:00:00|20414955020|2024-03-25 00:00:00|       1917|           S85|             SEGUROS|2494900.76|          2323|18 CANON Y SOBREC...|         232634|      OTROS SEGUROS PER...|2494900.76|       S|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
+|2024-04-25 00:00:00|20269985900|2024-02-12 00:00:00|       1113|           S87|  SERVICIOS PÚBLICOS| 1350000.0|          1184|00 RECURSOS ORDIN...|         232211|      SERVICIO DE SUMIN...| 1350000.0|       S|          0|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|20100152356|2024-02-13 00:00:00|       1184|           S87|  SERVICIOS PÚBLICOS| 700403.37|          1248|00 RECURSOS ORDIN...|         232212|      SERVICIO DE AGUA ...| 700403.37|       S|          0|        22 EDUCACION|     158|       6|          8|
+|2024-04-25 00:00:00|20513669560|2024-03-05 00:00:00|       1736|           S60|MANTENIMIENTO PRE...|  530422.0|          1975|18 CANON Y SOBREC...|       23271199|        SERVICIOS DIVERSOS|  530422.0|       S|          Q|         08 COMERCIO|     151|      21|         43|
+|2024-04-25 00:00:00|20269985900|2024-02-01 00:00:00|        459|           S87|  SERVICIOS PÚBLICOS| 517998.46|           485|00 RECURSOS ORDIN...|         232211|      SERVICIO DE SUMIN...| 517998.46|       S|          0|        22 EDUCACION|     158|       6|          8|
+|2024-04-25 00:00:00|20414955020|2024-01-31 00:00:00|        398|           S85|             SEGUROS|  476877.0|           695|18 CANON Y SOBREC...|         232634|      OTROS SEGUROS PER...|  476877.0|       S|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
+|2024-04-25 00:00:00|20100152356|2024-02-12 00:00:00|       1114|           S87|  SERVICIOS PÚBLICOS|  450000.0|          1185|00 RECURSOS ORDIN...|         232212|      SERVICIO DE AGUA ...|  450000.0|       S|          0|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|20503758114|2024-03-05 00:00:00|       1724|           S07|ASESORIA, CONSULT...|  422871.0|          1967|18 CANON Y SOBREC...|         262326|      COSTO DE CONST.PO...|  422871.0|       S|          Q|       15 TRANSPORTE|     241|      33|         66|
+|2024-04-25 00:00:00|20536547976|2024-02-02 00:00:00|          1|           B17|COMBUSTIBLES, CAR...|  392168.0|           515|18 CANON Y SOBREC...|         231311|      COMBUSTIBLES Y CA...|  22538.39|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|20269985900|2024-02-29 00:00:00|       1656|           S07|ASESORIA, CONSULT...|  362435.0|          1874|18 CANON Y SOBREC...|         262326|      COSTO DE CONST.PO...|  362435.0|       S|          Q|       15 TRANSPORTE|     241|      33|         66|
+|2024-04-25 00:00:00|20155108038|2024-03-14 00:00:00|         70|           B89|TELAS Y MATERIALE...|  219760.0|          2233|18 CANON Y SOBREC...|         212111|      UNIFORME PERSONAL...|     143.0|       B|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
+|2024-04-25 00:00:00|20155108038|2024-03-14 00:00:00|         70|           B89|TELAS Y MATERIALE...|  213300.0|          2233|18 CANON Y SOBREC...|         212111|      UNIFORME PERSONAL...|     145.0|       B|          Q|03 PLANEAMIENTO, ...|      54|       6|         11|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+----------+--------------+--------------------+---------------+--------------------------+----------+--------+-----------+--------------------+--------+--------+-----------+
+only showing top 15 rows
+=== Contar órdenes por TipoBien ===
+val conteoPorTipo: org.apache.spark.sql.DataFrame = [TipoBien: string, count: bigint]
++--------+-----+
+|TipoBien|count|
++--------+-----+
+|       B|  395|
+|       S| 2957|
++--------+-----+
+
+=== Promedio de Importe por TipoBien ===
+val promedioImporte: org.apache.spark.sql.DataFrame = [TipoBien: string, promedio_importe: double]
++--------+------------------+
+|TipoBien|  promedio_importe|
++--------+------------------+
+|       B| 34457.66055696202|
+|       S|15408.971406831251|
++--------+------------------+
+
+=== Estadísticas de Importe por FuenteFinanciamiento ===
+val estadisticas: org.apache.spark.sql.DataFrame = [FuenteFinanciamiento: string, importe_max: double ... 4 more fields]
++--------------------+-----------+-----------+-----------------+-------------------+---------------+
+|FuenteFinanciamiento|importe_max|importe_min| importe_promedio|      importe_total|total_registros|
++--------------------+-----------+-----------+-----------------+-------------------+---------------+
+|00 RECURSOS ORDIN...|  1350000.0|     1375.0|284823.6027272727|         3133059.63|             11|
+|18 CANON Y SOBREC...|  8153385.0|        0.0|16862.98268521319|5.576588374000001E7|           3307|
+|09 RECURSOS DIREC...|    18000.0|      151.0|7159.454545454545|           236262.0|             33|
+|           15 FONCOR|    39899.0|    39899.0|          39899.0|            39899.0|              1|
++--------------------+-----------+-----------+-----------------+-------------------+---------------+
+
+=== Consulta SQL: Top 10 importes más altos ===
+val topImportes: org.apache.spark.sql.DataFrame = [FechaOrden: timestamp, NumeroOrden: bigint ... 2 more fields]
++-------------------+-----------+----------+--------+
+|         FechaOrden|NumeroOrden|   Importe|TipoBien|
++-------------------+-----------+----------+--------+
+|2024-04-02 00:00:00|         90| 8153385.0|       B|
+|2024-01-18 00:00:00|          1| 6525000.0|       S|
+|2024-04-02 00:00:00|         89| 2962734.5|       B|
+|2024-03-25 00:00:00|       1917|2494900.76|       S|
+|2024-02-12 00:00:00|       1113| 1350000.0|       S|
+|2024-02-13 00:00:00|       1184| 700403.37|       S|
+|2024-03-05 00:00:00|       1736|  530422.0|       S|
+|2024-02-01 00:00:00|        459| 517998.46|       S|
+|2024-01-31 00:00:00|        398|  476877.0|       S|
+|2024-02-12 00:00:00|       1114|  450000.0|       S|
++-------------------+-----------+----------+--------+
+
+
+scala> 
+
+
+
+
+(spark-env) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ ./run_spark_vistas.sh 
+WARNING: Using incubator modules: jdk.incubator.vector
+25/11/26 20:52:19 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 4.0.1
+      /_/
+         
+Using Scala version 2.13.16 (OpenJDK 64-Bit Server VM, Java 21.0.9)
+Type in expressions to have them evaluated.
+Type :help for more information.
+Spark context available as 'sc' (master = local[*], app id = local-1764208349062).
+Spark session available as 'spark'.
+
+scala> :load pc4_vistas_temporales.scala
+     | 
+val args: Array[String] = Array()
+Loading pc4_vistas_temporales.scala...
+import org.apache.spark.sql.functions._
+val bienesServiciosDF: org.apache.spark.sql.DataFrame = [FechaCorte: timestamp, NumeroRuc: bigint ... 16 more fields]
+root
+ |-- FechaCorte: timestamp (nullable = true)
+ |-- NumeroRuc: long (nullable = true)
+ |-- FechaOrden: timestamp (nullable = true)
+ |-- NumeroOrden: long (nullable = true)
+ |-- CodigoGenerico: string (nullable = true)
+ |-- DescripcionGenerico: string (nullable = true)
+ |-- Importe: double (nullable = true)
+ |-- ExpedienteSiaf: long (nullable = true)
+ |-- FuenteFinanciamiento: string (nullable = true)
+ |-- EspecificoGasto: long (nullable = true)
+ |-- DescripcionEspecificoGasto: string (nullable = true)
+ |-- Cantidad: double (nullable = true)
+ |-- TipoBien: string (nullable = true)
+ |-- TipoRecurso: string (nullable = true)
+ |-- FuncionPrograma: string (nullable = true)
+ |-- MetaSiaf: long (nullable = true)
+ |-- Programa: long (nullable = true)
+ |-- Subprograma: long (nullable = true)
+
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|         FechaCorte|  NumeroRuc|         FechaOrden|NumeroOrden|CodigoGenerico| DescripcionGenerico| Importe|ExpedienteSiaf|FuenteFinanciamiento|EspecificoGasto|DescripcionEspecificoGasto|Cantidad|TipoBien|TipoRecurso|     FuncionPrograma|MetaSiaf|Programa|Subprograma|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|2024-04-25 00:00:00|20536547976|2024-02-02 00:00:00|          1|           B17|COMBUSTIBLES, CAR...|392168.0|           515|18 CANON Y SOBREC...|         231311|      COMBUSTIBLES Y CA...|22538.39|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B71|OFICINA: UTILES Y...|  4500.0|           637|18 CANON Y SOBREC...|         231512|      PAPELERIA EN GENE...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B16|COCINA,COMEDOR,CA...| 18000.0|           637|18 CANON Y SOBREC...|         231532|      DE COCINA, COMEDO...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B31|ENSEÑANZA: MANUAL...|  5700.0|           637|18 CANON Y SOBREC...|       23159999|                     OTROS|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  2500.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|     5.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  5850.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  2700.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  6250.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  2500.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  4520.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  4000.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
+|2024-04-25 00:00:00|10092577827|2024-02-08 00:00:00|          3|           B09|ALIMENTOS Y BEBID...|  4800.0|           940|18 CANON Y SOBREC...|         231111|      ALIMENTOS Y BEBID...|  4000.0|       B|          Q|23 PROTECCION SOCIAL|     156|      51|        114|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+only showing top 10 rows
+
+=== CONSULTA 1: JOIN ===
+val consulta1: org.apache.spark.sql.DataFrame = [NumeroRuc: bigint, NumeroOrden: bigint ... 3 more fields]
++-----------+-----------+--------+------+--------+
+|  NumeroRuc|NumeroOrden| Importe|Orden2|Importe2|
++-----------+-----------+--------+------+--------+
+|10255672741|         69|  7500.0|  2253|  9000.0|
+|10217833430|       1424| 10000.0|  2998|  5000.0|
+|10257571675|         53| 12000.0|  1910| 12000.0|
+|10486484239|        946|  9000.0|  2119|  9000.0|
+|10735001847|        463| 13000.0|  2221| 19500.0|
+|10466809140|         66| 13500.0|  2251| 13500.0|
+|10764722553|         42| 10500.0|  2422| 12250.0|
+|10735919305|        702|  6000.0|  2506|  6000.0|
+|10258463116|        424|  5250.0|  2610|  5250.0|
+|10258660132|        129|  9600.0|  1982|  9600.0|
+|10732406242|       1321|  7800.0|  1993| 25200.0|
+|10254509448|        931|  7500.0|  2042|  7500.0|
+|10255993017|        243| 10500.0|  2401| 10500.0|
+|20208752759|         93| 9579.24|    94|  532.18|
+|20208752759|         93|10643.62|    94|  532.18|
++-----------+-----------+--------+------+--------+
+
+
+=== CONSULTA 2: GROUP BY COUNT ===
+val consulta2: org.apache.spark.sql.DataFrame = [TipoBien: string, Total: bigint]
++--------+-----+
+|TipoBien|Total|
++--------+-----+
+|       S| 2957|
+|       B|  395|
++--------+-----+
+
+
+=== CONSULTA 3: ORDER BY ===
+val consulta3: org.apache.spark.sql.DataFrame = [NumeroRuc: bigint, NumeroOrden: bigint ... 2 more fields]
++-----------+-----------+----------+--------+
+|  NumeroRuc|NumeroOrden|   Importe|TipoBien|
++-----------+-----------+----------+--------+
+|20547639309|         90| 8153385.0|       B|
+|20605159398|          1| 6525000.0|       S|
+|20547639309|         89| 2962734.5|       B|
+|20414955020|       1917|2494900.76|       S|
+|20269985900|       1113| 1350000.0|       S|
+|20100152356|       1184| 700403.37|       S|
+|20513669560|       1736|  530422.0|       S|
+|20269985900|        459| 517998.46|       S|
+|20414955020|        398|  476877.0|       S|
+|20100152356|       1114|  450000.0|       S|
+|20503758114|       1724|  422871.0|       S|
+|20536547976|          1|  392168.0|       B|
+|20269985900|       1656|  362435.0|       S|
+|20155108038|         70|  219760.0|       B|
+|20155108038|         70|  213300.0|       B|
+|20155108038|         70|  158712.0|       B|
+|20503896185|        887|  150000.0|       S|
+|20155108038|         70|  127050.0|       B|
+|20332970411|        309|  95053.87|       S|
+|20478091771|        112|  89996.91|       S|
++-----------+-----------+----------+--------+
+
+
+scala> 
+
+
+(spark-env) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ chmod +x run_ml_spark.sh 
+(spark-env) usuario@Omen:~/Documentos/Cursos/9/MacroDatos/docker-hadoop-spark/Pc4$ ./run_ml_spark.sh 
+WARNING: Using incubator modules: jdk.incubator.vector
+25/11/26 21:00:19 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 4.0.1
+      /_/
+         
+Using Scala version 2.13.16 (OpenJDK 64-Bit Server VM, Java 21.0.9)
+Type in expressions to have them evaluated.
+Type :help for more information.
+Spark context available as 'sc' (master = local[*], app id = local-1764208825247).
+Spark session available as 'spark'.
+
+scala> :load ml_spark.scala
+val args: Array[String] = Array()
+Loading ml_spark.scala...
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.regression.LinearRegression
+import org.apache.spark.ml.evaluation._
+import org.apache.spark.ml.feature._
+import org.apache.spark.sql.functions._
+
+=== CARGANDO DATOS ===
+val rawData: org.apache.spark.sql.DataFrame = [FechaCorte: timestamp, NumeroRuc: bigint ... 16 more fields]
+Total registros: 3352
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|         FechaCorte|  NumeroRuc|         FechaOrden|NumeroOrden|CodigoGenerico| DescripcionGenerico| Importe|ExpedienteSiaf|FuenteFinanciamiento|EspecificoGasto|DescripcionEspecificoGasto|Cantidad|TipoBien|TipoRecurso|     FuncionPrograma|MetaSiaf|Programa|Subprograma|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+|2024-04-25 00:00:00|20536547976|2024-02-02 00:00:00|          1|           B17|COMBUSTIBLES, CAR...|392168.0|           515|18 CANON Y SOBREC...|         231311|      COMBUSTIBLES Y CA...|22538.39|       B|          Q|03 PLANEAMIENTO, ...|     180|       6|          8|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B71|OFICINA: UTILES Y...|  4500.0|           637|18 CANON Y SOBREC...|         231512|      PAPELERIA EN GENE...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B16|COCINA,COMEDOR,CA...| 18000.0|           637|18 CANON Y SOBREC...|         231532|      DE COCINA, COMEDO...|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B31|ENSEÑANZA: MANUAL...|  5700.0|           637|18 CANON Y SOBREC...|       23159999|                     OTROS|  1500.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
+|2024-04-25 00:00:00|10438105862|2024-02-02 00:00:00|          2|           B47|IMPRESOS Y FORMUL...|  2500.0|           637|18 CANON Y SOBREC...|        2319913|      LIBROS, DIARIOS, ...|     5.0|       B|          Q|         08 COMERCIO|     149|      21|         43|
++-------------------+-----------+-------------------+-----------+--------------+--------------------+--------+--------------+--------------------+---------------+--------------------------+--------+--------+-----------+--------------------+--------+--------+-----------+
+only showing top 5 rows
+
+=== PREPARANDO DATOS PARA CLASIFICACIÓN ===
+val dataClasif: org.apache.spark.sql.DataFrame = [Importe: double, NumeroOrden: bigint ... 2 more fields]
+Registros limpios clasificación: 3352
++--------+-----------+--------+--------+
+| Importe|NumeroOrden|Cantidad|TipoBien|
++--------+-----------+--------+--------+
+|392168.0|          1|22538.39|       B|
+|  4500.0|          2|  1500.0|       B|
+| 18000.0|          2|  1500.0|       B|
+|  5700.0|          2|  1500.0|       B|
+|  2500.0|          2|     5.0|       B|
++--------+-----------+--------+--------+
+only showing top 5 rows
+val labelIndexer: org.apache.spark.ml.feature.StringIndexerModel = StringIndexerModel: uid=strIdx_1597e2126e14, handleInvalid=error
+val assembler: org.apache.spark.ml.feature.VectorAssembler = VectorAssembler: uid=vecAssembler_f334a3ef9534, handleInvalid=error, numInputCols=3
+val trainClasif: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Importe: double, NumeroOrden: bigint ... 2 more fields]
+val testClasif: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [Importe: double, NumeroOrden: bigint ... 2 more fields]
+Train: 2326, Test: 1026
+
+=== ENTRENANDO DECISION TREE ===
+val dt: org.apache.spark.ml.classification.DecisionTreeClassifier = dtc_7a72175f6f35
+val pipelineClasif: org.apache.spark.ml.Pipeline = pipeline_4f1c3f982353
+val modelClasif: org.apache.spark.ml.PipelineModel = pipeline_4f1c3f982353
+val predictionsClasif: org.apache.spark.sql.DataFrame = [Importe: double, NumeroOrden: bigint ... 7 more fields]
+
+=== PREDICCIONES CLASIFICACIÓN ===
++--------+----------+-------+--------+
+|TipoBien|prediction|Importe|Cantidad|
++--------+----------+-------+--------+
+|       B|       1.0|    0.0|  4000.0|
+|       B|       1.0|    0.0|  4000.0|
+|       B|       1.0|    0.0|  4000.0|
+|       B|       1.0|    0.0|  4000.0|
+|       B|       1.0|    0.0|  1000.0|
+|       B|       1.0|    0.0|  1000.0|
+|       B|       1.0|    0.0|  1000.0|
+|       B|       1.0|    0.0|   646.0|
+|       B|       1.0|    0.0|   646.0|
+|       B|       1.0|    0.0|   646.0|
++--------+----------+-------+--------+
+only showing top 10 rows
+val evaluatorAcc: org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator = MulticlassClassificationEvaluator: uid=mcEval_db2ef6d4c45a, metricName=accuracy, metricLabel=0.0, beta=1.0, eps=1.0E-15
+val evaluatorF1: org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator = MulticlassClassificationEvaluator: uid=mcEval_4b27e54f1f3e, metricName=f1, metricLabel=0.0, beta=1.0, eps=1.0E-15
+val evaluatorRecall: org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator = MulticlassClassificationEvaluator: uid=mcEval_44261f625331, metricName=weightedRecall, metricLabel=0.0, beta=1.0, eps=1.0E-15
+val accuracy: Double = 0.9990253411306043
+val f1: Double = 0.9990270605405565
+val recall: Double = 0.9990253411306043
+
+=== MÉTRICAS CLASIFICACIÓN ===
+Accuracy: 0,9990
+F1-Score: 0,9990
+Recall: 0,9990
+
+
+=== PREPARANDO DATOS PARA REGRESIÓN ===
+val dataReg: org.apache.spark.sql.DataFrame = [Importe: double, Cantidad: double ... 1 more field]
+Registros limpios regresión: 3271
++--------+--------+-----------+
+| Importe|Cantidad|NumeroOrden|
++--------+--------+-----------+
+|392168.0|22538.39|          1|
+|  4500.0|  1500.0|          2|
+| 18000.0|  1500.0|          2|
+|  5700.0|  1500.0|          2|
+|  2500.0|     5.0|          2|
++--------+--------+-----------+
+only showing top 5 rows
+val dataRegRenamed: org.apache.spark.sql.DataFrame = [label: double, Cantidad: double ... 1 more field]
+val assemblerReg: org.apache.spark.ml.feature.VectorAssembler = VectorAssembler: uid=vecAssembler_957041906f0f, handleInvalid=error, numInputCols=2
+val trainReg: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [label: double, Cantidad: double ... 1 more field]
+val testReg: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [label: double, Cantidad: double ... 1 more field]
+Train: 2265, Test: 1006                                                         
+
+=== ENTRENANDO LINEAR REGRESSION ===
+val lr: org.apache.spark.ml.regression.LinearRegression = linReg_7ad439587af9
+val pipelineReg: org.apache.spark.ml.Pipeline = pipeline_e1c348e3cc3c
+25/11/26 21:01:23 WARN Instrumentation: [e0f150ec] regParam is zero, which might cause numerical instability and overfitting.
+val modelReg: org.apache.spark.ml.PipelineModel = pipeline_e1c348e3cc3c
+val predictionsReg: org.apache.spark.sql.DataFrame = [label: double, Cantidad: double ... 3 more fields]
+
+=== PREDICCIONES REGRESIÓN ===
++-----+------------------+--------+-----------+
+|label|        prediction|Cantidad|NumeroOrden|
++-----+------------------+--------+-----------+
+|  7.2| 2464.893950094261|   272.0|        103|
+|  8.0|  2232.16979646243|    10.0|         78|
+| 10.0|2227.1722200839245|     5.0|         78|
+| 16.0|2224.1736742568214|     2.0|         78|
+| 17.2|2226.1727048082234|     4.0|         78|
+| 21.0|2227.1722200839245|     5.0|         78|
+| 26.5|2223.1741589811204|     1.0|         78|
+| 48.0|2228.1717353596255|     6.0|         78|
+| 48.0|2217.8454717967943|    12.0|         92|
+|61.18|2542.6888196651103|   344.0|         98|
++-----+------------------+--------+-----------+
+only showing top 10 rows
+val evaluatorRMSE: org.apache.spark.ml.evaluation.RegressionEvaluator = RegressionEvaluator: uid=regEval_696172b5b2b0, metricName=rmse, throughOrigin=false
+val evaluatorR2: org.apache.spark.ml.evaluation.RegressionEvaluator = RegressionEvaluator: uid=regEval_e8604149418d, metricName=r2, throughOrigin=false
+val evaluatorMAE: org.apache.spark.ml.evaluation.RegressionEvaluator = RegressionEvaluator: uid=regEval_50749a1c86d1, metricName=mae, throughOrigin=false
+val rmse: Double = 273523.4904317747
+val r2: Double = 0.028599566908720675
+val mae: Double = 12550.516635508146
+
+=== MÉTRICAS REGRESIÓN ===
+RMSE: 273523,4904
+R2: 0,0286
+MAE: 12550,5166
+
+=== RESUMEN FINAL ===
+CLASIFICACIÓN (Decision Tree):
+  Accuracy: 0,9990
+  F1-Score: 0,9990
+  Recall: 0,9990
+
+REGRESIÓN (Linear Regression):
+  RMSE: 273523,4904
+  R2: 0,0286
+  MAE: 12550,5166
+
+scala> 
